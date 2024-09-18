@@ -46,7 +46,8 @@ data class UserPreferences(
     val dailyGoal: Int,
     val weeklyGoal: Int,
     val monthlyGoal: Int,
-    val language: String
+    val language: String,
+    val theme: Theme
 )
 
 data class ActivityBreakdown(
@@ -63,3 +64,7 @@ data class Challenge(
     val goal: Int,
     val participants: List<String>
 )
+
+enum class Theme {
+    LIGHT, DARK, SYSTEM
+}

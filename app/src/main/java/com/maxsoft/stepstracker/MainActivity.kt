@@ -23,6 +23,7 @@ import com.maxsoft.stepstracker.ui.theme.StepsTrackerTheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.LocalDateTime
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
@@ -54,8 +55,17 @@ fun StepsTrackerApp(viewModel: StepsTrackerViewModel = viewModel()) {
         is UiState.Success -> StepsTrackerContent(
             state,
             viewModel::toggleTracking,
-            viewModel::resetSteps
+            viewModel::resetSteps,
+            viewModel::updateUserInfo,
+            viewModel::updateDailyGoal,
+            viewModel::updateSensitivity,
+            viewModel::backupData,
+            viewModel::restoreData,
+            viewModel::shareProgress,
+            viewModel::syncWithWearable,
+            viewModel::joinChallenge
         )
+
         is UiState.Error -> ErrorScreen(state.message)
         UiState.Initial, UiState.Loading -> LoadingScreen()
     }
@@ -65,8 +75,20 @@ fun StepsTrackerApp(viewModel: StepsTrackerViewModel = viewModel()) {
 fun StepsTrackerContent(
     state: UiState.Success,
     onToggleTracking: () -> Unit,
-    onResetSteps: () -> Unit
+    onResetSteps: () -> Unit,
+    onUpdateUserInfo: (Float, Float, Int, Gender) -> Unit,
+    onUpdateDailyGoal: (Int) -> Unit,
+    onUpdateSensitivity: (Float) -> Unit,
+    onBackupData: () -> Unit,
+    onRestoreData: () -> Unit,
+    onShareProgress: () -> Unit,
+    onSyncWithWearable: () -> Unit,
+    onJoinChallenge: () -> Unit
 ) {
+    var showUserInfoDialog by remember { mutableStateOf(false) }
+    var showGoalDialog by remember { mutableStateOf(false) }
+    var showSensitivityDialog by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -114,30 +136,226 @@ fun StepsTrackerContent(
             }
         }
 
+        Button(onClick = { showUserInfoDialog = true }) {
+            Text(stringResource(R.string.personal_info_settings))
+        }
+
+        Button(onClick = { showGoalDialog = true }) {
+            Text(stringResource(R.string.goal_daily))
+        }
+
+        Button(onClick = { showSensitivityDialog = true }) {
+            Text(stringResource(R.string.settings_sensitivity))
+        }
+
+        Button(onClick = onBackupData) {
+            Text(stringResource(R.string.settings_backup))
+        }
+
+        Button(onClick = onRestoreData) {
+            Text(stringResource(R.string.settings_restore))
+        }
+
+        Button(onClick = onShareProgress) {
+            Text(stringResource(R.string.share_progress))
+        }
+
+        Button(onClick = onSyncWithWearable) {
+            Text(stringResource(R.string.sync_wearable))
+        }
+
+        Button(onClick = onJoinChallenge) {
+            Text(stringResource(R.string.challenge_join))
+        }
+
         LazyColumn {
             item {
                 Text(
                     text = stringResource(R.string.graph_last_24_hours),
                     style = MaterialTheme.typography.titleMedium
                 )
-                // TODO: Implement chart for last 24 hours
+                StepChart(data = state.lastDayStats)
             }
             item {
                 Text(
                     text = stringResource(R.string.graph_weekly),
                     style = MaterialTheme.typography.titleMedium
                 )
-                // TODO: Implement weekly chart
+                StepChart(data = state.weeklyStats)
             }
             item {
                 Text(
                     text = stringResource(R.string.graph_monthly),
                     style = MaterialTheme.typography.titleMedium
                 )
-                // TODO: Implement monthly chart
+                StepChart(data = state.monthlyStats)
             }
         }
     }
+
+    if (showUserInfoDialog) {
+        UserInfoDialog(
+            currentWeight = state.userWeight,
+            currentHeight = state.userHeight,
+            currentAge = state.userAge,
+            currentGender = state.userGender,
+            onDismiss = { showUserInfoDialog = false },
+            onConfirm = { weight, height, age, gender ->
+                onUpdateUserInfo(weight, height, age, gender)
+                showUserInfoDialog = false
+            }
+        )
+    }
+
+    if (showGoalDialog) {
+        GoalDialog(
+            currentGoal = state.dailyGoal,
+            onDismiss = { showGoalDialog = false },
+            onConfirm = { goal ->
+                onUpdateDailyGoal(goal)
+                showGoalDialog = false
+            }
+        )
+    }
+
+    if (showSensitivityDialog) {
+        SensitivityDialog(
+            currentSensitivity = state.sensitivity,
+            onDismiss = { showSensitivityDialog = false },
+            onConfirm = { sensitivity ->
+                onUpdateSensitivity(sensitivity)
+                showSensitivityDialog = false
+            }
+        )
+    }
+}
+
+@Composable
+fun StepChart(data: List<StepData>) {
+}
+
+@Composable
+fun UserInfoDialog(
+    currentWeight: Float,
+    currentHeight: Float,
+    currentAge: Int,
+    currentGender: Gender,
+    onDismiss: () -> Unit,
+    onConfirm: (Float, Float, Int, Gender) -> Unit
+) {
+    var weight by remember { mutableStateOf(currentWeight) }
+    var height by remember { mutableStateOf(currentHeight) }
+    var age by remember { mutableStateOf(currentAge) }
+    var gender by remember { mutableStateOf(currentGender) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.personal_info_settings)) },
+        text = {
+            Column {
+                OutlinedTextField(
+                    value = weight.toString(),
+                    onValueChange = { weight = it.toFloatOrNull() ?: weight },
+                    label = { Text(stringResource(R.string.weight_setting)) }
+                )
+                OutlinedTextField(
+                    value = height.toString(),
+                    onValueChange = { height = it.toFloatOrNull() ?: height },
+                    label = { Text(stringResource(R.string.height_setting)) }
+                )
+                OutlinedTextField(
+                    value = age.toString(),
+                    onValueChange = { age = it.toIntOrNull() ?: age },
+                    label = { Text(stringResource(R.string.age_setting)) }
+                )
+                Row {
+                    RadioButton(
+                        selected = gender == Gender.MALE,
+                        onClick = { gender = Gender.MALE }
+                    )
+                    Text(stringResource(R.string.gender_male))
+                    RadioButton(
+                        selected = gender == Gender.FEMALE,
+                        onClick = { gender = Gender.FEMALE }
+                    )
+                    Text(stringResource(R.string.gender_female))
+                }
+            }
+        },
+        confirmButton = {
+            Button(onClick = { onConfirm(weight, height, age, gender) }) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text(stringResource(android.R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+fun GoalDialog(
+    currentGoal: Int,
+    onDismiss: () -> Unit,
+    onConfirm: (Int) -> Unit
+) {
+    var goal by remember { mutableStateOf(currentGoal) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.goal_daily)) },
+        text = {
+            OutlinedTextField(
+                value = goal.toString(),
+                onValueChange = { goal = it.toIntOrNull() ?: goal },
+                label = { Text(stringResource(R.string.goal_daily)) }
+            )
+        },
+        confirmButton = {
+            Button(onClick = { onConfirm(goal) }) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text(stringResource(android.R.string.cancel))
+            }
+        }
+    )
+}
+
+@Composable
+fun SensitivityDialog(
+    currentSensitivity: Int,
+    onDismiss: () -> Unit,
+    onConfirm: (Float) -> Unit
+) {
+    var sensitivity by remember { mutableStateOf(currentSensitivity) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.settings_sensitivity)) },
+        text = {
+            Slider(
+                value = sensitivity.toFloat(),
+                onValueChange = { sensitivity = it.toInt() },
+                valueRange = 0.5f..2f,
+                steps = 15
+            )
+        },
+        confirmButton = {
+            Button(onClick = { onConfirm(sensitivity.toFloat()) }) {
+                Text(stringResource(android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text(stringResource(android.R.string.cancel))
+            }
+        }
+    )
 }
 
 @Composable
@@ -169,11 +387,14 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
     private var isTracking = false
     private var lastStepCount = 0
     private var startTime = 0L
-    private var userWeight = 70f // Default weight in kg
-    private var userHeight = 170f // Default height in cm
-    private var userAge = 30 // Default age
-    private var userGender = "male" // Default gender
-    private var dailyGoal = 10000 // Default daily goal
+    private var userWeight = 70f
+    private var userHeight = 170f
+    private var userAge = 30
+    private var userGender = Gender.MALE
+    private var dailyGoal = 10000
+    private var weeklyGoal = 70000
+    private var monthlyGoal = 300000
+    private var sensitivity = 1f
 
     fun initializeSensor(context: Context) {
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -191,14 +412,14 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
                 weeklyStats = emptyList(),
                 monthlyStats = emptyList(),
                 isTracking = false,
-                sensitivity = 1,
+                sensitivity = 10,
                 dailyGoal = dailyGoal,
                 userWeight = userWeight,
                 userHeight = userHeight,
                 userAge = userAge,
-                userGender = Gender.MALE,
-                weeklyGoal = 30000,
-                monthlyGoal = 120000
+                userGender = userGender,
+                weeklyGoal = weeklyGoal,
+                monthlyGoal = monthlyGoal
             )
         }
     }
@@ -234,7 +455,7 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
             if (lastStepCount == 0) {
                 lastStepCount = currentSteps
             }
-            val stepsTaken = currentSteps - lastStepCount
+            val stepsTaken = ((currentSteps - lastStepCount) * sensitivity).toInt()
             updateUiState(stepsTaken)
         }
     }
@@ -254,7 +475,11 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
                 userWeight = userWeight,
                 userHeight = userHeight,
                 userAge = userAge,
-                userGender = Gender.MALE
+                userGender = userGender,
+                sensitivity = 10,
+                lastDayStats = generateMockStepData(24),
+                weeklyStats = generateMockStepData(7),
+                monthlyStats = generateMockStepData(30)
             )
         }
     }
@@ -262,7 +487,8 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
     private fun calculateCalories(steps: Int): Float {
         val strideLengthInMeters = (userHeight * 0.415) / 100
         val distanceInKm = (steps * strideLengthInMeters) / 1000
-        val speed = distanceInKm / (TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis() - startTime) + 1)
+        val speed =
+            distanceInKm / (TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis() - startTime) + 1)
         val met = when {
             speed < 4.0 -> 2.9
             speed < 5.6 -> 3.3
@@ -277,7 +503,7 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
         return (steps * strideLengthInMeters) / 1000
     }
 
-    fun updateUserInfo(weight: Float, height: Float, age: Int, gender: String) {
+    fun updateUserInfo(weight: Float, height: Float, age: Int, gender: Gender) {
         userWeight = weight
         userHeight = height
         userAge = age
@@ -289,4 +515,37 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
         dailyGoal = goal
         updateUiState()
     }
+
+    fun updateSensitivity(newSensitivity: Float) {
+        sensitivity = newSensitivity
+        updateUiState()
+    }
+
+    private fun generateMockStepData(count: Int): List<StepData> {
+        val now = LocalDateTime.now()
+        return List(count) { index ->
+            StepData(
+                timestamp = now.minusDays(index.toLong()),
+                steps = (1000..10000).random(),
+                calories = (100..1000).random().toFloat(),
+                distance = (1..10).random().toFloat()
+            )
+        }
+    }
+
+    fun backupData() {
+    }
+
+    fun restoreData() {
+    }
+
+    fun shareProgress() {
+    }
+
+    fun syncWithWearable() {
+    }
+
+    fun joinChallenge() {
+    }
 }
+

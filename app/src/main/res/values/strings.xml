@@ -45,4 +45,17 @@
     <string name="compatibility_info">Device Compatibility</string>
     <string name="health_benefits">Health Benefits</string>
     <string name="walking_tips">Walking Tips</string>
+    <string name="dialog_user_info_title">Update Personal Information</string>
+    <string name="label_weight">Weight (kg)</string>
+    <string name="label_height">Height (cm)</string>
+    <string name="label_age">Age</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="dialog_goal_title">Set Daily Goal</string>
+    <string name="label_daily_goal">Daily Step Goal</string>
+    <string name="action_update_user_info">Update Personal Info</string>
+    <string name="action_update_daily_goal">Update Daily Goal</string>
+    <string name="sensitivity_settings">Sensitivity Settings</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
 </resources>
