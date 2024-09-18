@@ -57,10 +57,8 @@ Download Steps Tracker now and take the first step towards a healthier, more act
 
 # TODO
 
-- implement tracking logic
-- improve design
+- persist steps to some db
+- improve design (make  it cool!)
 - add nice charts for today, week, month
 - add calories
 - add screen to set your weight and other personal information
-- fix e: file:///C:/My-progs/Android/StepsTracker/app/src/main/java/com/maxsoft/stepstracker/MainActivity.kt:190:17 No value passed for parameter 'dailyGoal'
-- add all params to above method 

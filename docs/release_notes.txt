@@ -1,0 +1,13 @@
+Version 1.0.0 (Initial Release):
+
+- Automatic step counting using built-in sensor
+- Track steps, calories burned, walking distance, and time
+- View last 24 hours, weekly, and monthly statistics in graphs
+- Privacy-focused design with no sign-in required
+- Flexible controls to start, pause, and reset step counter
+- Data backup and restore via Google Drive
+- Customizable sensitivity for accurate step counting
+- Multi-language support
+- Sync with Samsung Health and Google Fit
+
+We're excited to bring you Steps Tracker! This initial release includes all core features for accurate and battery-friendly step tracking. We're continuously working on improvements and new features based on your feedback. Enjoy your journey to a healthier lifestyle with Steps Tracker!
