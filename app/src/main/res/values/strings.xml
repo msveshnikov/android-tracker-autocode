@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Steps Tracker</string>
+    <string name="action_start">Start</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_reset">Reset</string>
+    <string name="steps_count">Steps: %1$d</string>
+    <string name="calories_burned">Calories Burned: %1$.2f</string>
+    <string name="distance_walked">Distance: %1$.2f km</string>
+    <string name="time_elapsed">Time: %1$s</string>
+    <string name="graph_last_24_hours">Last 24 Hours</string>
+    <string name="graph_weekly">Weekly</string>
+    <string name="graph_monthly">Monthly</string>
+    <string name="settings_sensitivity">Sensitivity</string>
+    <string name="settings_backup">Backup Data</string>
+    <string name="settings_restore">Restore Data</string>
+    <string name="settings_language">Language</string>
+    <string name="error_no_sensor">No step sensor found on this device</string>
+    <string name="notification_tracking_active">Step tracking active</string>
+    <string name="goal_daily">Daily Goal</string>
+    <string name="goal_weekly">Weekly Goal</string>
+    <string name="goal_monthly">Monthly Goal</string>
+    <string name="share_progress">Share Progress</string>
+    <string name="sync_wearable">Sync with Wearable</string>
+    <string name="challenge_join">Join Challenge</string>
+    <string name="activity_breakdown">Activity Breakdown</string>
+    <string name="widget_steps">Steps Widget</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="about_app">About Steps Tracker</string>
+</resources>
