@@ -26,3 +26,23 @@ val DarkOnBackground = Color(0xFFFFFFFF)
 
 val LightOnSurface = Color(0xFF000000)
 val DarkOnSurface = Color(0xFFFFFFFF)
+
+val ChartBlue = Color(0xFF3F51B5)
+val ChartGreen = Color(0xFF4CAF50)
+val ChartOrange = Color(0xFFFF9800)
+val ChartRed = Color(0xFFF44336)
+
+val GoalColor = Color(0xFF00BCD4)
+val ProgressColor = Color(0xFF8BC34A)
+
+val ThemePrimary = Color(0xFF6200EE)
+val ThemeSecondary = Color(0xFF03DAC6)
+val ThemeBackground = Color(0xFFF5F5F5)
+val ThemeSurface = Color(0xFFFFFFFF)
+val ThemeError = Color(0xFFB00020)
+
+val DarkThemePrimary = Color(0xFFBB86FC)
+val DarkThemeSecondary = Color(0xFF03DAC6)
+val DarkThemeBackground = Color(0xFF121212)
+val DarkThemeSurface = Color(0xFF1E1E1E)
+val DarkThemeError = Color(0xFFCF6679)

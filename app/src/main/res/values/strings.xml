@@ -27,4 +27,22 @@
     <string name="widget_steps">Steps Widget</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="about_app">About Steps Tracker</string>
+    <string name="personal_info_settings">Personal Information</string>
+    <string name="weight_setting">Weight</string>
+    <string name="height_setting">Height</string>
+    <string name="age_setting">Age</string>
+    <string name="gender_setting">Gender</string>
+    <string name="theme_setting">Theme</string>
+    <string name="sync_health_apps">Sync with Health Apps</string>
+    <string name="samsung_health">Samsung Health</string>
+    <string name="google_fit">Google Fit</string>
+    <string name="battery_optimization">Battery Optimization</string>
+    <string name="step_counting_info">Step Counting Information</string>
+    <string name="support_contact">Contact Support</string>
+    <string name="feature_request">Feature Request</string>
+    <string name="rate_app">Rate App</string>
+    <string name="data_backup_info">Data Backup Information</string>
+    <string name="compatibility_info">Device Compatibility</string>
+    <string name="health_benefits">Health Benefits</string>
+    <string name="walking_tips">Walking Tips</string>
 </resources>

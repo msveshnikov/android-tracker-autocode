@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.StepsTracker" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorSecondary">@color/secondary</item>
+        <item name="android:colorBackground">@color/background</item>
+        <!--        <item name="android:colorSurface">@color/surface</item>-->
     </style>
 
     <style name="Theme.StepsTracker.Dark" parent="android:Theme.Material.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:colorPrimary">@color/purple_200</item>
+        <item name="android:colorSecondary">@color/teal_200</item>
+        <item name="android:colorBackground">@color/black</item>
+        <!--        <item name="android:colorSurface">@color/black</item>-->
+    </style>
+
+    <style name="Theme.StepsTracker.Blue" parent="Theme.StepsTracker">
+        <item name="android:colorPrimary">@color/blue</item>
+    </style>
+
+    <style name="Theme.StepsTracker.Green" parent="Theme.StepsTracker">
+        <item name="android:colorPrimary">@color/green</item>
+    </style>
+
+    <style name="Theme.StepsTracker.Orange" parent="Theme.StepsTracker">
+        <item name="android:colorPrimary">@color/orange</item>
+    </style>
+
+    <style name="Theme.StepsTracker.Red" parent="Theme.StepsTracker">
+        <item name="android:colorPrimary">@color/red</item>
     </style>
 </resources>
