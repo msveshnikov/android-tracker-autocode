@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.maxsoft.stepstracker.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.maxsoft.stepstracker.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.maxsoft.stepstracker.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.maxsoft.stepstracker.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_goals"
+        android:name="com.maxsoft.stepstracker.ui.goals.GoalsFragment"
+        android:label="@string/title_goals"
+        tools:layout="@layout/fragment_goals" />
+
+    <fragment
+        android:id="@+id/navigation_stats"
+        android:name="com.maxsoft.stepstracker.ui.stats.StatsFragment"
+        android:label="@string/title_stats"
+        tools:layout="@layout/fragment_stats" />
+
+    <fragment
+        android:id="@+id/navigation_challenges"
+        android:name="com.maxsoft.stepstracker.ui.challenges.ChallengesFragment"
+        android:label="@string/title_challenges"
+        tools:layout="@layout/fragment_challenges" />
+
+    <fragment
+        android:id="@+id/navigation_sync"
+        android:name="com.maxsoft.stepstracker.ui.sync.SyncFragment"
+        android:label="@string/title_sync"
+        tools:layout="@layout/fragment_sync" />
+
+    <fragment
+        android:id="@+id/navigation_backup"
+        android:name="com.maxsoft.stepstracker.ui.backup.BackupFragment"
+        android:label="@string/title_backup"
+        tools:layout="@layout/fragment_backup" />
+
+</navigation>

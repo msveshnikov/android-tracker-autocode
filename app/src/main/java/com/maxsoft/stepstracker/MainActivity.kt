@@ -65,7 +65,6 @@ fun StepsTrackerApp(viewModel: StepsTrackerViewModel = viewModel()) {
             viewModel::syncWithWearable,
             viewModel::joinChallenge
         )
-
         is UiState.Error -> ErrorScreen(state.message)
         UiState.Initial, UiState.Loading -> LoadingScreen()
     }
@@ -174,21 +173,21 @@ fun StepsTrackerContent(
                     text = stringResource(R.string.graph_last_24_hours),
                     style = MaterialTheme.typography.titleMedium
                 )
-                StepChart(data = state.lastDayStats)
+                DailyGraph(data = state.lastDayStats)
             }
             item {
                 Text(
                     text = stringResource(R.string.graph_weekly),
                     style = MaterialTheme.typography.titleMedium
                 )
-                StepChart(data = state.weeklyStats)
+                WeeklyGraph(data = state.weeklyStats)
             }
             item {
                 Text(
                     text = stringResource(R.string.graph_monthly),
                     style = MaterialTheme.typography.titleMedium
                 )
-                StepChart(data = state.monthlyStats)
+                MonthlyGraph(data = state.monthlyStats)
             }
         }
     }
@@ -228,10 +227,6 @@ fun StepsTrackerContent(
             }
         )
     }
-}
-
-@Composable
-fun StepChart(data: List<StepData>) {
 }
 
 @Composable
@@ -328,7 +323,7 @@ fun GoalDialog(
 
 @Composable
 fun SensitivityDialog(
-    currentSensitivity: Int,
+    currentSensitivity: Float,
     onDismiss: () -> Unit,
     onConfirm: (Float) -> Unit
 ) {
@@ -339,14 +334,14 @@ fun SensitivityDialog(
         title = { Text(stringResource(R.string.settings_sensitivity)) },
         text = {
             Slider(
-                value = sensitivity.toFloat(),
-                onValueChange = { sensitivity = it.toInt() },
+                value = sensitivity,
+                onValueChange = { sensitivity = it },
                 valueRange = 0.5f..2f,
                 steps = 15
             )
         },
         confirmButton = {
-            Button(onClick = { onConfirm(sensitivity.toFloat()) }) {
+            Button(onClick = { onConfirm(sensitivity) }) {
                 Text(stringResource(android.R.string.ok))
             }
         },
@@ -412,7 +407,7 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
                 weeklyStats = emptyList(),
                 monthlyStats = emptyList(),
                 isTracking = false,
-                sensitivity = 10,
+                sensitivity = sensitivity,
                 dailyGoal = dailyGoal,
                 userWeight = userWeight,
                 userHeight = userHeight,
@@ -476,7 +471,7 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
                 userHeight = userHeight,
                 userAge = userAge,
                 userGender = userGender,
-                sensitivity = 10,
+                sensitivity = sensitivity,
                 lastDayStats = generateMockStepData(24),
                 weeklyStats = generateMockStepData(7),
                 monthlyStats = generateMockStepData(30)
@@ -548,4 +543,3 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
     fun joinChallenge() {
     }
 }
-

@@ -1,12 +1,10 @@
 # Steps Tracker
 
-A battery-friendly pedometer app that uses the built-in sensor to count your steps, track burned
-calories, walking distance, and time. All information is clearly displayed in graphs.
+A battery-friendly pedometer app that uses the built-in sensor to count your steps, track burned calories, walking distance, and time. All information is clearly displayed in graphs.
 
 ## Features
 
-- **Automatic Step Counting**: Counts steps even when your phone is in your hand, bag, pocket, or
-  armband, and with the screen locked.
+- **Automatic Step Counting**: Counts steps even when your phone is in your hand, bag, pocket, or armband, and with the screen locked.
 - **Power Efficient**: Uses the built-in sensor for battery-friendly operation.
 - **Comprehensive Tracking**: Monitors steps, calories burned, walking distance, and time.
 - **Graphical Reports**: View last 24 hours, weekly, and monthly statistics in easy-to-read graphs.
@@ -23,14 +21,15 @@ calories, walking distance, and time. All information is clearly displayed in gr
 - **Social Sharing**: Share your achievements with friends and family.
 - **Integration with Wearables**: Sync data with popular smartwatches and fitness bands.
 - **Challenges**: Participate in step challenges with other users.
-- **Detailed Activity Breakdown**: View step counts for different activities (walking, running,
-  etc.).
+- **Detailed Activity Breakdown**: View step counts for different activities (walking, running, etc.).
 - **Customizable Widgets**: Add widgets to your home screen for quick access to stats.
+- **Persistent Storage**: Implement local database for reliable data storage and retrieval.
+- **Enhanced UI/UX**: Modernize the app's design with Material Design 3 principles.
+- **Advanced Analytics**: Implement machine learning for personalized insights and predictions.
 
 ## Health and Fitness
 
-Steps Tracker is designed to improve your health and fitness by encouraging regular walking. It's an
-essential tool for:
+Steps Tracker is designed to improve your health and fitness by encouraging regular walking. It's an essential tool for:
 
 - Weight management
 - Cardiovascular health
@@ -42,6 +41,23 @@ essential tool for:
 - Syncs with Samsung Health and Google Fit for a comprehensive health tracking experience.
 - Optimized for various Android devices, including older versions with some limitations.
 
+## Technical Architecture
+
+- **MVVM Architecture**: Utilizes ViewModel and LiveData for efficient UI updates and data management.
+- **Jetpack Compose**: Implements modern UI toolkit for building native Android UI.
+- **Room Database**: Local persistence for offline access and improved performance.
+- **Kotlin Coroutines**: Manages background tasks and asynchronous operations.
+- **Dagger Hilt**: Dependency injection for cleaner and more testable code.
+- **Navigation Component**: Simplifies in-app navigation and supports deep linking.
+
+## Design Considerations
+
+- **Material Design 3**: Adopts the latest Material Design guidelines for a modern and consistent look.
+- **Dark Mode Support**: Implements a system-wide dark mode for improved visibility and battery life.
+- **Accessibility**: Ensures the app is usable by people with various disabilities.
+- **Localization**: Supports multiple languages and cultural adaptations.
+- **Responsive Layout**: Optimizes UI for different screen sizes and orientations.
+
 ## Important Notes
 
 - Input correct personal information in settings for accurate distance and calorie calculations.
@@ -50,15 +66,14 @@ essential tool for:
 
 ## Support
 
-For any issues or feature requests, please contact our support team. We're committed to continually
-improving Steps Tracker based on user feedback.
+For any issues or feature requests, please contact our support team. We're committed to continually improving Steps Tracker based on user feedback.
+
+## Contributing
+
+We welcome contributions! Please see our CONTRIBUTING.md file for details on how to get started.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 Download Steps Tracker now and take the first step towards a healthier, more active lifestyle!
-
-# TODO
-
-- persist steps to some db
-- improve design (make  it cool!)
-- add nice charts for today, week, month
-- add calories
-- add screen to set your weight and other personal information

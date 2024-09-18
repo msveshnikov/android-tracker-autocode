@@ -22,6 +22,8 @@ class Personal(private val context: Context) {
         private val AGE_KEY = intPreferencesKey("age")
         private val GENDER_KEY = stringPreferencesKey("gender")
         private val DAILY_GOAL_KEY = intPreferencesKey("daily_goal")
+        private val WEEKLY_GOAL_KEY = intPreferencesKey("weekly_goal")
+        private val MONTHLY_GOAL_KEY = intPreferencesKey("monthly_goal")
         private val SENSITIVITY_KEY = floatPreferencesKey("sensitivity")
     }
 
@@ -43,6 +45,14 @@ class Personal(private val context: Context) {
 
     val dailyGoal: Flow<Int> = dataStore.data.map { preferences ->
         preferences[DAILY_GOAL_KEY] ?: 10000
+    }
+
+    val weeklyGoal: Flow<Int> = dataStore.data.map { preferences ->
+        preferences[WEEKLY_GOAL_KEY] ?: 70000
+    }
+
+    val monthlyGoal: Flow<Int> = dataStore.data.map { preferences ->
+        preferences[MONTHLY_GOAL_KEY] ?: 300000
     }
 
     val sensitivity: Flow<Float> = dataStore.data.map { preferences ->
@@ -79,6 +89,18 @@ class Personal(private val context: Context) {
         }
     }
 
+    suspend fun updateWeeklyGoal(goal: Int) {
+        dataStore.edit { preferences ->
+            preferences[WEEKLY_GOAL_KEY] = goal
+        }
+    }
+
+    suspend fun updateMonthlyGoal(goal: Int) {
+        dataStore.edit { preferences ->
+            preferences[MONTHLY_GOAL_KEY] = goal
+        }
+    }
+
     suspend fun updateSensitivity(sensitivity: Float) {
         dataStore.edit { preferences ->
             preferences[SENSITIVITY_KEY] = sensitivity
@@ -86,3 +108,7 @@ class Personal(private val context: Context) {
     }
 }
 
+enum class Gender {
+    MALE,
+    FEMALE
+}
