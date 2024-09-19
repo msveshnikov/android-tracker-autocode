@@ -31,6 +31,9 @@ public class StepCounterService extends Service implements SensorEventListener {
   private int stepCount = 0;
   private StepDao stepDao;
   private ExecutorService executorService;
+  private float distanceTraveled = 0;
+  private int caloriesBurned = 0;
+  private long startTime;
 
   @Override
   public void onCreate() {
@@ -40,6 +43,7 @@ public class StepCounterService extends Service implements SensorEventListener {
     stepSensor = app.getStepSensor();
     stepDao = app.getStepDao();
     executorService = Executors.newSingleThreadExecutor();
+    startTime = System.currentTimeMillis();
   }
 
   @Override
@@ -69,6 +73,7 @@ public class StepCounterService extends Service implements SensorEventListener {
       int stepsDelta = newStepCount - stepCount;
       stepCount = newStepCount;
       updateStepCount(stepsDelta);
+      updateDistanceAndCalories(stepsDelta);
       updateNotification();
     }
   }
@@ -103,7 +108,10 @@ public class StepCounterService extends Service implements SensorEventListener {
 
     return new NotificationCompat.Builder(this, CHANNEL_ID)
         .setContentTitle("Step Counter")
-        .setContentText("Steps: " + stepCount)
+        .setContentText(
+            String.format(
+                "Steps: %d | Distance: %.2f km | Calories: %d",
+                stepCount, distanceTraveled, caloriesBurned))
         .setSmallIcon(R.drawable.ic_notifications_black_24dp)
         .setContentIntent(pendingIntent)
         .build();
@@ -123,6 +131,15 @@ public class StepCounterService extends Service implements SensorEventListener {
         });
   }
 
+  private void updateDistanceAndCalories(int stepsDelta) {
+    float strideLength = 0.762f;
+    float distanceDelta = stepsDelta * strideLength / 1000;
+    distanceTraveled += distanceDelta;
+
+    float caloriesPerStep = 0.04f;
+    caloriesBurned += Math.round(stepsDelta * caloriesPerStep);
+  }
+
   public void startTracking() {
     Intent intent = new Intent(this, StepCounterService.class);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -130,5 +147,37 @@ public class StepCounterService extends Service implements SensorEventListener {
     } else {
       startService(intent);
     }
+  }
+
+  public void pauseTracking() {
+    unregisterStepSensor();
+  }
+
+  public void resumeTracking() {
+    registerStepSensor();
+  }
+
+  public void resetTracking() {
+    stepCount = 0;
+    distanceTraveled = 0;
+    caloriesBurned = 0;
+    startTime = System.currentTimeMillis();
+    updateNotification();
+  }
+
+  public int getStepCount() {
+    return stepCount;
+  }
+
+  public float getDistanceTraveled() {
+    return distanceTraveled;
+  }
+
+  public int getCaloriesBurned() {
+    return caloriesBurned;
+  }
+
+  public long getElapsedTime() {
+    return System.currentTimeMillis() - startTime;
   }
 }

@@ -41,5 +41,24 @@ public interface StepDao {
   @Query("SELECT MAX(count) FROM steps WHERE date >= :startDate AND date <= :endDate")
   LiveData<Integer> getMaxStepsBetweenDates(long startDate, long endDate);
 
+  @Query("INSERT OR REPLACE INTO steps (date, count) VALUES (:timestamp, COALESCE((SELECT count FROM steps WHERE date = :timestamp), 0) + :stepsDelta)")
   void insertSteps(long timestamp, int stepsDelta);
+
+  @Query("SELECT SUM(count) FROM steps WHERE date >= :startDate AND date <= :endDate")
+  LiveData<Integer> getCaloriesBurnedBetweenDates(long startDate, long endDate);
+
+  @Query("SELECT SUM(count) * :strideLength FROM steps WHERE date >= :startDate AND date <= :endDate")
+  LiveData<Float> getWalkingDistanceBetweenDates(long startDate, long endDate, float strideLength);
+
+  @Query("SELECT COUNT(DISTINCT date) FROM steps WHERE date >= :startDate AND date <= :endDate AND count >= :goalSteps")
+  LiveData<Integer> getDaysGoalAchievedBetweenDates(long startDate, long endDate, int goalSteps);
+
+  @Query("SELECT * FROM steps WHERE count = (SELECT MAX(count) FROM steps)")
+  LiveData<Step> getMostActiveDay();
+
+  @Query("SELECT * FROM steps WHERE count = (SELECT MIN(count) FROM steps WHERE count > 0)")
+  LiveData<Step> getLeastActiveDay();
+
+  @Query("SELECT AVG(count) FROM steps WHERE strftime('%w', date / 1000, 'unixepoch') = :dayOfWeek")
+  LiveData<Float> getAverageStepsForDayOfWeek(String dayOfWeek);
 }
