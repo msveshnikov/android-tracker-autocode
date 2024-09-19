@@ -14,7 +14,7 @@ sealed interface UiState {
         val weeklyStats: List<StepData>,
         val monthlyStats: List<StepData>,
         val isTracking: Boolean,
-        val sensitivity: Int,
+        val sensitivity: Float,
         val dailyGoal: Int,
         val weeklyGoal: Int,
         val monthlyGoal: Int,

@@ -12,13 +12,18 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_statistics"
-        android:icon="@drawable/ic_statistics_black_24dp"
-        android:title="@string/title_statistics" />
+        android:id="@+id/navigation_stats"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_stats" />
+
+    <item
+        android:id="@+id/navigation_goals"
+        android:icon="@drawable/common_google_signin_btn_icon_light"
+        android:title="@string/goal_setting" />
 
     <item
         android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@drawable/ic_launcher_foreground"
         android:title="@string/title_settings" />
 
 </menu>

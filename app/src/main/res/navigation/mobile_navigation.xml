@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.maxsoft.stepstracker.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_statistics"
+        android:name="com.maxsoft.stepstracker.ui.statistics.StatisticsFragment"
+        android:label="@string/title_statistics"
+        tools:layout="@layout/fragment_statistics" />
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -32,31 +32,55 @@
     <fragment
         android:id="@+id/navigation_goals"
         android:name="com.maxsoft.stepstracker.ui.goals.GoalsFragment"
-        android:label="@string/title_goals"
+        android:label="@string/goal_setting"
         tools:layout="@layout/fragment_goals" />
-
-    <fragment
-        android:id="@+id/navigation_stats"
-        android:name="com.maxsoft.stepstracker.ui.stats.StatsFragment"
-        android:label="@string/title_stats"
-        tools:layout="@layout/fragment_stats" />
 
     <fragment
         android:id="@+id/navigation_challenges"
         android:name="com.maxsoft.stepstracker.ui.challenges.ChallengesFragment"
-        android:label="@string/title_challenges"
+        android:label="@string/challenges"
         tools:layout="@layout/fragment_challenges" />
 
     <fragment
         android:id="@+id/navigation_sync"
         android:name="com.maxsoft.stepstracker.ui.sync.SyncFragment"
-        android:label="@string/title_sync"
+        android:label="@string/sync_health_apps"
         tools:layout="@layout/fragment_sync" />
 
     <fragment
         android:id="@+id/navigation_backup"
         android:name="com.maxsoft.stepstracker.ui.backup.BackupFragment"
-        android:label="@string/title_backup"
+        android:label="@string/data_backup"
         tools:layout="@layout/fragment_backup" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.maxsoft.stepstracker.ui.profile.ProfileFragment"
+        android:label="@string/personal_info_settings"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_activity_breakdown"
+        android:name="com.maxsoft.stepstracker.ui.activitybreakdown.ActivityBreakdownFragment"
+        android:label="@string/detailed_activity_breakdown"
+        tools:layout="@layout/fragment_activity_breakdown" />
+
+    <fragment
+        android:id="@+id/navigation_health_benefits"
+        android:name="com.maxsoft.stepstracker.ui.healthbenefits.HealthBenefitsFragment"
+        android:label="@string/health_benefits"
+        tools:layout="@layout/fragment_health_benefits" />
+
+    <fragment
+        android:id="@+id/navigation_walking_tips"
+        android:name="com.maxsoft.stepstracker.ui.walkingtips.WalkingTipsFragment"
+        android:label="@string/walking_tips"
+        tools:layout="@layout/fragment_walking_tips" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.maxsoft.stepstracker.ui.about.AboutFragment"
+        android:label="@string/about_app"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

@@ -108,7 +108,3 @@ class Personal(private val context: Context) {
     }
 }
 
-enum class Gender {
-    MALE,
-    FEMALE
-}

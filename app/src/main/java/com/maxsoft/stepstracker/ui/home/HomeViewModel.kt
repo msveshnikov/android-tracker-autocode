@@ -128,7 +128,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 timestamp = now.minusHours(index.toLong()),
                 steps = (100..1000).random(),
                 calories = (10..100).random().toFloat(),
-                distance = (0.1..1.0).random()
+                distance = 0.5f
             )
         }
         _weeklyStats.value = List(7) { index ->
@@ -136,7 +136,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 timestamp = now.minusDays(index.toLong()),
                 steps = (1000..10000).random(),
                 calories = (100..1000).random().toFloat(),
-                distance = (1.0..10.0).random()
+                distance =  0.5f
             )
         }
         _monthlyStats.value = List(30) { index ->
@@ -144,7 +144,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 timestamp = now.minusDays(index.toLong()),
                 steps = (5000..20000).random(),
                 calories = (500..2000).random().toFloat(),
-                distance = (5.0..20.0).random()
+                distance = 0.5f
             )
         }
     }

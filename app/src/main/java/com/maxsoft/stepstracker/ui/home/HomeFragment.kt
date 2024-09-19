@@ -20,9 +20,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.maxsoft.stepstracker.DailyGraph
+import com.maxsoft.stepstracker.MonthlyGraph
 import com.maxsoft.stepstracker.R
 import com.maxsoft.stepstracker.StepsTrackerViewModel
 import com.maxsoft.stepstracker.UiState
+import com.maxsoft.stepstracker.WeeklyGraph
 import com.maxsoft.stepstracker.ui.theme.StepsTrackerTheme
 
 class HomeFragment : Fragment() {

@@ -529,17 +529,22 @@ class StepsTrackerViewModel : ViewModel(), SensorEventListener {
     }
 
     fun backupData() {
+        // Implement backup functionality
     }
 
     fun restoreData() {
+        // Implement restore functionality
     }
 
     fun shareProgress() {
+        // Implement sharing functionality
     }
 
     fun syncWithWearable() {
+        // Implement wearable sync functionality
     }
 
     fun joinChallenge() {
+        // Implement challenge joining functionality
     }
 }

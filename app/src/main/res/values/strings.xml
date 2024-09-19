@@ -62,6 +62,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_goals">Goals</string>
+    <string name="title_stats">Statistics</string>
+    <string name="title_challenges">Challenges</string>
+    <string name="title_sync">Sync</string>
+    <string name="title_backup">Backup</string>
     <string name="weight_management">Weight Management</string>
     <string name="cardiovascular_health">Cardiovascular Health</string>
     <string name="stress_reduction">Stress Reduction</string>
@@ -90,4 +96,6 @@
     <string name="older_device_note">Step tracking may vary on older device versions</string>
     <string name="support_contact_info">Contact our support team for issues or feature requests</string>
     <string name="download_cta">Download Steps Tracker now!</string>
+    <string name="add_notification">Add Notification</string>
+    <string name="title_statistics">Statistics</string>
 </resources>
